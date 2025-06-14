@@ -3,17 +3,15 @@ import Socket from "./Sockets";
 import { Send } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useUser } from "./UserContext";
 export const Filetransfer = () => {
   const pendingCandidates = useRef([]);
-  const [username, setUsername] = useState(null);
   const [clients, setClients] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [incomingOffers, setIncomingOffers] = useState([]);
   const peerRef = useRef(null);
   const dataChannelRef = useRef(null);
   const fileBufferRef = useRef([]);
-  const prompted = useRef(false);
   const [receivingMetadata, setReceivingMetadata] = useState(null);
 const [receiveProgress, setReceiveProgress] = useState(0);
 const [transferSpeed, setTransferSpeed] = useState(0);
@@ -21,17 +19,7 @@ const [estimatedTime, setEstimatedTime] = useState(null);
 const [isReceiving, setIsReceiving] = useState(false);
 const transferStartTimeRef = useRef(null);
 const cancelTransferRef = useRef(false);
-
-
-
-  useEffect(() => {
-    if (!prompted.current) {
-      const name = prompt("Enter your name");
-      if (name) setUsername(name);
-      prompted.current = true;
-    }
-  }, []);
-
+const {username}=useUser()
   useEffect(() => {
     if (!username) return;
 
@@ -158,7 +146,7 @@ const transfer = async (id) => {
   const peer = new RTCPeerConnection();
   peerRef.current = peer;
 
-  // ⚠️ Set this BEFORE setRemoteDescription
+  
   peer.ondatachannel = (event) => {
     console.log("[Receiver] Data channel received:", event.channel.label);
     const channel = event.channel;
