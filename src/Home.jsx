@@ -42,7 +42,8 @@ const Home = () => {
     <>
       {/* Top bar with user info */}
       <div className="flex justify-between items-center px-6 pt-4">
-        <div className="text-5xl">ViaLan</div>
+        <div className="text-5xl">V
+          iaLan</div>
         {username && (
           <div className="flex items-center gap-3 bg-gray-100 px-4 py-2 rounded-full shadow-md">
             <User className="w-6 h-6 text-black" />
@@ -78,9 +79,9 @@ const Home = () => {
           <h3 className="text-xl font-semibold">Message</h3>
         </div>
 
-        <div className="w-full bg-gradient-to-r from-orange-200 to-cyan-500 rounded-xl p-4 text-center shadow-md hover:scale-105 transition-transform duration-200">
+        <div className="w-full bg-gradient-to-r from-orange-200 to-cyan-500 rounded-xl p-4 text-center shadow-md hover:scale-105 transition-transform duration-200" onClick={() => navigate('/meeting')}>
           <PhoneCall className="mx-auto mb-2 w-8 h-8" />
-          <h3 className="text-xl font-semibold">Calling</h3>
+          <h3 className="text-xl font-semibold">Video meeting</h3>
         </div>
       </div>
     </>
